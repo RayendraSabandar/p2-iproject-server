@@ -9,25 +9,11 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       name: {
+        allowNull: false,
         type: Sequelize.STRING
       },
       UserId: {
-        type: Sequelize.INTEGER,
-        references : {
-          model : 'Users',
-          key : 'id'
-        },
-        onUpdate : 'cascade',
-        onDelete : 'cascade'
-      },
-      CocktailId: {
-        type: Sequelize.INTEGER,
-        references : {
-          model : 'Cocktails',
-          key : 'id'
-        },
-        onUpdate : 'cascade',
-        onDelete : 'cascade'
+        type: Sequelize.INTEGER
       },
       createdAt: {
         allowNull: false,
