@@ -22,14 +22,64 @@ class CocktailController {
                 method : 'get',
                 url : `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`,
             })
-            res.status(200).json(cocktail.data.drinks[0])
+            const cocktailDetail = cocktail.data.drinks[0]
+            res.status(200).json({cocktailDetail})
         } catch (err) {
+            console.log(err);
             res.status(500).json(err.name)
         }
     }
 
-    static async searchByCategory(req, res){
+    static async searchByIngredient(req, res){
+        const { ingredient } = req.params
+        try {
+            const cocktail = await axios({
+                method: 'get',
+                url : `https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${ingredient}`
+            })
+            res.status(200).json(cocktail.data.drinks)
+        } catch (err) {
+            res.status(500).json(err)
+        }
+    }
 
+    static async filterByType(req, res){
+        const { type } = req.params
+        try {
+            const cocktail = await axios({
+                method: 'get',
+                url : `https://www.thecocktaildb.com/api/json/v1/1/filter.php?a=${type}`
+            })
+            res.status(200).json(cocktail.data.drinks)
+        } catch (err) {
+            res.status(500).json(err)
+        }
+    }
+
+    static async filterByGlass(req, res){
+        const { glass } = req.params
+        try {
+            const cocktail = await axios({
+                method: 'get',
+                url : `http://www.thecocktaildb.com/api/json/v1/1/filter.php?g=${glass}`
+            })
+            res.status(200).json(cocktail.data.drinks)
+        } catch (err) {
+            res.status(500).json(err)
+        }
+    }
+
+    static async filterByCategory(req, res){
+        const { category } = req.params
+        try {
+            const cocktail = await axios({
+                method: 'get',
+                url : `https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=${category}`
+            })
+            res.status(200).json(cocktail.data.drinks)
+        } catch (err) {
+            res.status(500).json(err)
+        }
     }
 
     static async add(req, res){
