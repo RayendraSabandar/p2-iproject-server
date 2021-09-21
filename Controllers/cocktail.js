@@ -11,7 +11,7 @@ class CocktailController {
             })
             res.status(200).json(cocktails.data.drinks)
         } catch (err) {
-            res.status(500).json(err.name)
+            res.status(400).json(err)
         }
     }
 
