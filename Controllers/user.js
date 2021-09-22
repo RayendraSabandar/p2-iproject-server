@@ -14,7 +14,10 @@ class UserController {
                 email : user.email
             })
         } catch (err) {
-            res.status(400).json(err)
+            const validationErrors = err.errors.map(err => {
+                return err.message
+            })
+            res.status(400).json({message: validationErrors})
         }
     }
 
