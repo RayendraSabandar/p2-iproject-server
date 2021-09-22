@@ -71,7 +71,19 @@ class CocktailController {
                 method: 'get',
                 url : `https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${ingredient}`
             })
-            res.status(200).json(cocktail.data.drinks)
+            const idArray = cocktail.data.drinks.map(el => {
+                return el.idDrink
+            })
+            let newArray = idArray.map(async(el) => {
+                const cocktailDetail = await axios({
+                    method : 'get',
+                    url : `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${el}`,
+                })  
+               return cocktailDetail.data.drinks[0]
+            });
+            Promise.all(newArray).then(function(values) {
+                res.status(200).json(values)
+            })
         } catch (err) {
             res.status(500).json(err)
         }
@@ -84,7 +96,19 @@ class CocktailController {
                 method: 'get',
                 url : `https://www.thecocktaildb.com/api/json/v1/1/filter.php?a=${type}`
             })
-            res.status(200).json(cocktail.data.drinks)
+            const idArray = cocktail.data.drinks.map(el => {
+                return el.idDrink
+            })
+            let newArray = idArray.map(async(el) => {
+                const cocktailDetail = await axios({
+                    method : 'get',
+                    url : `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${el}`,
+                })  
+               return cocktailDetail.data.drinks[0]
+            });
+            Promise.all(newArray).then(function(values) {
+                res.status(200).json(values)
+            })
         } catch (err) {
             res.status(500).json(err)
         }
@@ -97,7 +121,19 @@ class CocktailController {
                 method: 'get',
                 url : `http://www.thecocktaildb.com/api/json/v1/1/filter.php?g=${glass}`
             })
-            res.status(200).json(cocktail.data.drinks)
+            const idArray = cocktail.data.drinks.map(el => {
+                return el.idDrink
+            })
+            let newArray = idArray.map(async(el) => {
+                const cocktailDetail = await axios({
+                    method : 'get',
+                    url : `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${el}`,
+                })  
+               return cocktailDetail.data.drinks[0]
+            });
+            Promise.all(newArray).then(function(values) {
+                res.status(200).json(values)
+            })
         } catch (err) {
             res.status(500).json(err)
         }
@@ -110,7 +146,19 @@ class CocktailController {
                 method: 'get',
                 url : `https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=${category}`
             })
-            res.status(200).json(cocktail.data.drinks)
+            const idArray = cocktail.data.drinks.map(el => {
+                return el.idDrink
+            })
+            let newArray = idArray.map(async(el) => {
+                const cocktailDetail = await axios({
+                    method : 'get',
+                    url : `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${el}`,
+                })  
+               return cocktailDetail.data.drinks[0]
+            });
+            Promise.all(newArray).then(function(values) {
+                res.status(200).json(values)
+            })
         } catch (err) {
             res.status(500).json(err)
         }
