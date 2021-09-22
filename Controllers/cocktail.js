@@ -23,7 +23,7 @@ class CocktailController {
                 url : `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`,
             })
             const cocktailDetail = cocktail.data.drinks[0]
-            const ingredientName = []
+            const ingredientDetail = []
             const {
                 strIngredient1,
                 strIngredient2,
@@ -40,24 +40,51 @@ class CocktailController {
                 strIngredient13,
                 strIngredient14,
                 strIngredient15,
+                strMeasure1,
+                strMeasure2,
+                strMeasure3,
+                strMeasure4,
+                strMeasure5,
+                strMeasure6,
+                strMeasure7,
+                strMeasure8,
+                strMeasure9,
+                strMeasure10,
+                strMeasure11,
+                strMeasure12,
+                strMeasure13,
+                strMeasure14,
+                strMeasure15,
             } = cocktail.data.drinks[0]
-            if(strIngredient1) ingredientName.push(strIngredient1)
-            if(strIngredient2) ingredientName.push(strIngredient2)
-            if(strIngredient3) ingredientName.push(strIngredient3)
-            if(strIngredient4) ingredientName.push(strIngredient4)
-            if(strIngredient5) ingredientName.push(strIngredient5)
-            if(strIngredient6) ingredientName.push(strIngredient6)
-            if(strIngredient7) ingredientName.push(strIngredient7)
-            if(strIngredient8) ingredientName.push(strIngredient8)
-            if(strIngredient9) ingredientName.push(strIngredient9)
-            if(strIngredient10) ingredientName.push(strIngredient10)
-            if(strIngredient11) ingredientName.push(strIngredient11)
-            if(strIngredient12) ingredientName.push(strIngredient12)
-            if(strIngredient13) ingredientName.push(strIngredient13)
-            if(strIngredient14) ingredientName.push(strIngredient14)
-            if(strIngredient15) ingredientName.push(strIngredient15)
+            if(strIngredient1 || strMeasure1) ingredientDetail.push({ingredient : strIngredient1, measure : strMeasure1})
+            if(strIngredient2 || strMeasure2) ingredientDetail.push({ingredient : strIngredient2, measure : strMeasure2})
+            if(strIngredient3 || strMeasure3) ingredientDetail.push({ingredient : strIngredient3, measure : strMeasure3})
+            if(strIngredient4 || strMeasure4) ingredientDetail.push({ingredient : strIngredient4, measure : strMeasure4})
+            if(strIngredient5 || strMeasure5) ingredientDetail.push({ingredient : strIngredient5, measure : strMeasure5})
+            if(strIngredient6 || strMeasure6) ingredientDetail.push({ingredient : strIngredient6, measure : strMeasure6})
+            if(strIngredient7 || strMeasure7) ingredientDetail.push({ingredient : strIngredient7, measure : strMeasure7})
+            if(strIngredient8 || strMeasure8) ingredientDetail.push({ingredient : strIngredient8, measure : strMeasure8})
+            if(strIngredient9 || strMeasure9) ingredientDetail.push({ingredient : strIngredient9, measure : strMeasure9})
+            if(strIngredient10 || strMeasure10) ingredientDetail.push({ingredient : strIngredient10, measure : strMeasure10})
+            if(strIngredient11 || strMeasure11) ingredientDetail.push({ingredient : strIngredient11, measure : strMeasure11})
+            if(strIngredient12 || strMeasure12) ingredientDetail.push({ingredient : strIngredient12, measure : strMeasure12})
+            if(strIngredient13 || strMeasure13) ingredientDetail.push({ingredient : strIngredient13, measure : strMeasure13})
+            if(strIngredient14 || strMeasure14) ingredientDetail.push({ingredient : strIngredient14, measure : strMeasure14})
+            if(strIngredient15 || strMeasure15) ingredientDetail.push({ingredient : strIngredient15, measure : strMeasure15})
+            const youtubeVideos = await axios({
+                method : 'get',
+                url : 'https://youtube.googleapis.com/youtube/v3/search',
+                params : {
+                    part : 'snippet',
+                    q : cocktailDetail.strDrink + ' ' + 'tutorial',
+                    key : process.env.API_KEY
+                }
+            })
+            const youtubeVideoDatas = youtubeVideos.data.items.map(el => {
+                return el.id.videoId
+            })
 
-            res.status(200).json({cocktailDetail, ingredientName})
+            res.status(200).json({cocktailDetail, ingredientDetail, youtubeVideoDatas})
         } catch (err) {
             console.log(err);
             res.status(500).json(err.name)

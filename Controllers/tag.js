@@ -21,6 +21,7 @@ class TagController{
     static async findByName(req, res){
         const { name } = req.params
         const UserId = req.user_id
+        console.log(name, UserId);
         try {
             const tag = await Tag.findAll({
                 where : {
