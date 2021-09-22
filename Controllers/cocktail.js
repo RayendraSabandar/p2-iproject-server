@@ -23,7 +23,41 @@ class CocktailController {
                 url : `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`,
             })
             const cocktailDetail = cocktail.data.drinks[0]
-            res.status(200).json({cocktailDetail})
+            const ingredientName = []
+            const {
+                strIngredient1,
+                strIngredient2,
+                strIngredient3,
+                strIngredient4,
+                strIngredient5,
+                strIngredient6,
+                strIngredient7,
+                strIngredient8,
+                strIngredient9,
+                strIngredient10,
+                strIngredient11,
+                strIngredient12,
+                strIngredient13,
+                strIngredient14,
+                strIngredient15,
+            } = cocktail.data.drinks[0]
+            if(strIngredient1) ingredientName.push(strIngredient1)
+            if(strIngredient2) ingredientName.push(strIngredient2)
+            if(strIngredient3) ingredientName.push(strIngredient3)
+            if(strIngredient4) ingredientName.push(strIngredient4)
+            if(strIngredient5) ingredientName.push(strIngredient5)
+            if(strIngredient6) ingredientName.push(strIngredient6)
+            if(strIngredient7) ingredientName.push(strIngredient7)
+            if(strIngredient8) ingredientName.push(strIngredient8)
+            if(strIngredient9) ingredientName.push(strIngredient9)
+            if(strIngredient10) ingredientName.push(strIngredient10)
+            if(strIngredient11) ingredientName.push(strIngredient11)
+            if(strIngredient12) ingredientName.push(strIngredient12)
+            if(strIngredient13) ingredientName.push(strIngredient13)
+            if(strIngredient14) ingredientName.push(strIngredient14)
+            if(strIngredient15) ingredientName.push(strIngredient15)
+
+            res.status(200).json({cocktailDetail, ingredientName})
         } catch (err) {
             console.log(err);
             res.status(500).json(err.name)
@@ -90,7 +124,8 @@ class CocktailController {
                 url : `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${cocktailId}`,
             })
             try {
-            const { 
+            const {
+                idDrink, 
                 strDrink : name, 
                 strVideo : video, 
                 strCategory : category, 
@@ -130,6 +165,7 @@ class CocktailController {
                 strMeasure15,
             } = cocktailAPI.data.drinks[0]
             const cocktail = await Cocktail.create({
+                idDrink,
                 name,
                 type,
                 glass,
@@ -172,6 +208,7 @@ class CocktailController {
             res.status(201).json({
                 message : `Cocktail ${cocktail.name} has been suscessfully added to your tag`
             })
+            // res.status(201).json(cocktailAPI.data.drinks[0])
         } catch (err) {
             res.status(500).json(err.message)
         }

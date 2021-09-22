@@ -15,6 +15,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
   Cocktail.init({
+    idDrink: DataTypes.STRING,
     name: DataTypes.STRING,
     type: DataTypes.STRING,
     glass: DataTypes.STRING,
