@@ -10,7 +10,7 @@ async function authentication(req, res, next){
         if(err.message === 'jwt must be provided'){
             res.status(400).json({ message : 'No JWT is provided'})
         }
-        else if(err.message === 'invalid token'){
+        else if(err.message === 'invalid signature'){
             res.status(401).json({message : 'You are not authorized for this command'})
         }
     }
