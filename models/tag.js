@@ -16,7 +16,14 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
   Tag.init({
-    name: DataTypes.STRING,
+    name: {
+      type: DataTypes.STRING,
+      validate : {
+        notEmpty : {
+          msg: 'Must enter a tag name'
+        }
+      }
+    },
     UserId: DataTypes.INTEGER,
   }, {
     sequelize,
