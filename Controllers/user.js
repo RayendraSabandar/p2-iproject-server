@@ -41,7 +41,7 @@ class UserController {
                         email : user.email
                     }
                     const access_token = signToken(payload)
-                    res.status(200).json({access_token})
+                    res.status(200).json({access_token, email: payload.email, id: payload.id})
                 } else {
                     throw(incorrectCredentials)
                 }
